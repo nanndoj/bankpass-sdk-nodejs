@@ -54,7 +54,7 @@
     },
     "peerDependencies": {},
     "dependencies": {
-        "bankpass-core": "0.0.3",
+        "bankpass-core": "0.0.4",
         "node-fetch": "^2.6.0"
     }
 }

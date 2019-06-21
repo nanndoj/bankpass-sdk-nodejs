@@ -26,7 +26,7 @@ describe('requestIdenfitication', () => {
 
     test('should create a client using the config file path', () => {
         const client = new Bankpass({
-            keyFile: './test.config.json',
+            credentials: credentials as ServiceAccountOptions,
         });
 
         expect(client.requestUserIdentification).toBeTruthy();
@@ -34,7 +34,7 @@ describe('requestIdenfitication', () => {
 
     test('should retry in case of fail', done => {
         const client = new Bankpass({
-            keyFile: './test.config.json',
+            credentials: credentials as ServiceAccountOptions,
         });
 
         fetch.mock('*', 500);
@@ -47,7 +47,7 @@ describe('requestIdenfitication', () => {
 
     test('should issue a token request when requesting the user identification', done => {
         const client = new Bankpass({
-            keyFile: './test.config.json',
+            credentials: credentials as ServiceAccountOptions,
         });
 
         fetch.mock('*', { accessToken: ACCESS_TOKEN });
@@ -60,7 +60,7 @@ describe('requestIdenfitication', () => {
 
     test('should use the cached token when requesting the user identification', done => {
         const client = new Bankpass({
-            keyFile: './test.config.json',
+            credentials: credentials as ServiceAccountOptions,
         });
 
         fetch.mock('*', { accessToken: ACCESS_TOKEN });
@@ -77,7 +77,7 @@ describe('requestIdenfitication', () => {
 
     test('should sign the request for the access token', done => {
         const client = new Bankpass({
-            keyFile: './test.config.json',
+            credentials: credentials as ServiceAccountOptions,
         });
 
         fetch.mock('*', { accessToken: ACCESS_TOKEN });
@@ -94,7 +94,7 @@ describe('requestIdenfitication', () => {
 
     test('should use the access token in the identification request', done => {
         const client = new Bankpass({
-            keyFile: './test.config.json',
+            credentials: credentials as ServiceAccountOptions,
         });
 
         fetch.mock('*', { orderId: ORDER_ID });
