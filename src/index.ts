@@ -24,21 +24,34 @@ export class Bankpass {
         opts: IdentificationRequestOptions
     ): Promise<{ orderId: string }> => {
         const client: Client = await this.getClient();
-        return client.request(Paths.AUTH, opts);
+        return client.request(Paths.AUTH, this.createRequestObject(opts));
     };
 
     requestUserSignature = (userId: string) => {
         throw 'Not implemented yet';
     };
 
+    createRequestObject(body: any) {
+        return {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        };
+    }
+
     collectResponse = async (orderId: string) => {
         const client: Client = await this.getClient();
-        return client.request(Paths.COLLECT, { orderId });
+        return client.request(
+            Paths.COLLECT,
+            this.createRequestObject({ orderId })
+        );
     };
 
     getActivationCode = async (userId: string) => {
         const client: Client = await this.getClient();
-        return client.request(Paths.CODE, { userId });
+        return client.request(Paths.CODE, this.createRequestObject({ userId }));
     };
 
     async getClient(): Promise<Client> {

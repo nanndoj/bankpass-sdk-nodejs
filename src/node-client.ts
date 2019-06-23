@@ -29,7 +29,7 @@ class NodeClient extends Client {
         const sign = createSign('SHA256');
         sign.update(JSON.stringify(data));
         sign.end();
-        return Promise.resolve(sign.sign(this.key, 'hex'));
+        return Promise.resolve(sign.sign(this.key, 'base64'));
     }
 }
 
