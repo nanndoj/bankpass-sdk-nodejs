@@ -6,6 +6,7 @@ import {
     Paths,
 } from 'bankpass-core';
 import { NodeClientFactory } from './node-client';
+import { StatelessOrderOptions } from 'bankpass-core';
 
 export { ServiceAccountOptions } from 'bankpass-core';
 export { KeyType } from 'bankpass-core';
@@ -25,6 +26,16 @@ export class Bankpass {
     ): Promise<{ orderId: string }> => {
         const client: Client = await this.getClient();
         return client.request(Paths.AUTH, this.createRequestObject(opts));
+    };
+
+    createStatelessOrder = async (
+        opts: StatelessOrderOptions
+    ): Promise<{ orderId: string }> => {
+        const client: Client = await this.getClient();
+        return client.request(
+            Paths.STATELESS_AUTH,
+            this.createRequestObject(opts)
+        );
     };
 
     requestUserSignature = (userId: string) => {
